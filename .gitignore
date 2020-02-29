@@ -1,0 +1,13 @@
+.ipynb_checkpoints
+.ssh
+.env_setup
+
+cfg/
+conf/
+config/
+
+*.cfg
+*.conf
+*.config
+*.secret
+*.secrets
