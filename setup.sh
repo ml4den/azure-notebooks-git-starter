@@ -24,7 +24,7 @@ do
                  echo -e "\e[33mThe ~/library directory should be empty before cloning.\e[0m"
             else
                 read -p "Enter repository HTTPS or SSH location: " repo
-                git clone $repo
+                git clone $repo .
                 echo "Configuring git for $uname and $umail..."
                 git config --local user.name $uname
                 git config --local user.email $umail
