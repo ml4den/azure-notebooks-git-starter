@@ -12,7 +12,6 @@ echo Copy the public key to your GitHub settings:
 printf '%64s\n' | tr ' ' -
 cat ~/.ssh/id_rsa.pub
 printf '%64s\n' | tr ' ' -
-cp -R ~/.ssh ~/library/
 
 echo "Set up a Git repository?"
 PS3='Please select one of the options above: '
@@ -52,3 +51,5 @@ do
         *) echo "invalid option $REPLY";;
     esac
 done
+
+cp -R ~/.ssh ~/library/
