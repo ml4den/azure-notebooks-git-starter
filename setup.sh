@@ -13,9 +13,10 @@ printf '%64s\n' | tr ' ' -
 cat ~/.ssh/id_rsa.pub
 printf '%64s\n' | tr ' ' -
 
+printf "\n"
 echo "Set up a Git repository?"
 PS3='Please select one of the options above: '
-options=("git clone" "git init" "Quit")
+options=("git clone" "git init" "Skip for now")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -25,7 +26,8 @@ do
             else
                 read -p "Enter repository HTTPS or SSH location: " repo
                 git clone $repo .
-                echo "Configuring git for $uname and $umail..."
+                printf "\n"
+                echo "Configuring Git for $uname and $umail..."
                 git config --local user.name $uname
                 git config --local user.email $umail
                 printf "\n"
@@ -37,7 +39,8 @@ do
         "git init")
             printf "\n"
             git init
-            echo "Configuring git for $uname and $umail..."
+            printf "\n"
+            echo "Configuring Git for $uname and $umail..."
             git config --local user.name $uname
             git config --local user.email $umail
             printf "\n"
@@ -45,11 +48,20 @@ do
             printf "\n"
             break
             ;;
-        "Quit")
+        "Skip for now")
             break
             ;;
         *) echo "invalid option $REPLY";;
     esac
 done
 
+# Copy the keys to persistent storage
 cp -R ~/.ssh ~/library/
+
+# Create a startup file to be used for restoring the keys in new sessions
+echo "Creating ~/library/startup.sh"
+printf "cp -R ~/library/.ssh ~/\nchmod 400 ~/.ssh/id_rsa\n" > ~/library/startup.sh
+echo -e "\033[32mPlease add startup.sh your environment setup to avoid using your ssh keys:\033[m"
+echo -e "\033[32mAzure Notebooks -> Project Settings -> Environment -> Shell Script\033[m"
+
+# TODO: add .ssh, startup.sh and .ipynb_checkpoints to gitignore
