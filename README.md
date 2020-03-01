@@ -13,3 +13,5 @@ source <(curl -s https://raw.githubusercontent.com/ml4den/azure-notebooks-git-st
 ```
 ## Other Notes
 It is assumed that notebook projects and repositories have a one-to-one relationship. As such, this script will attempt to clone to the root of the ``~/library`` directory if the user selects the clone option.
+
+The script is far from perfect, so code contributions are welcome.
